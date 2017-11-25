@@ -1,0 +1,420 @@
+0.16.2 Node-RED Deploy 
+Nodo buttons
+P1 input
+BinkyRailways
+LedCycle
+Homie
+devices/#
+connected
+msg.payload
+Red
+devices/ewouts-ledcycle/led/color/set
+connected
+Green
+Blue
+Off
+delay 5 s
+Off
+msg.payload
+devices/lauras-ledcycle/led/color/set
+connected
+Rainbow
+devices/inges-ledcycle/led/color/set
+connected
+domoticz/out
+connected
+Convert to LED wheel
+msg.payload
+json
+  
+
+filter nodes
+input
+inject
+catch
+status
+link
+mqtt
+http
+websocket
+tcp
+udp
+Watson IoT
+output
+debug
+link
+mqtt
+http response
+websocket
+tcp
+udp
+Watson IoT
+play audio
+function
+function
+template
+delay
+trigger
+comment
+http request
+tcp request
+switch
+change
+range
+split
+join
+csv
+html
+json
+xml
+yaml
+rbe
+random
+smooth
+social
+e mail
+twitter
+e mail
+twitter
+storage
+tail
+file
+file
+analysis
+sentiment
+advanced
+watch
+feedparse
+exec
+Homie
+Homie shim
+Homie send
+from shim
+network
+ping
+ 
+info
+debug
+You can remove the selected nodes or links with delete
+Export nodes to clipboard
+Export to clipboardselected nodescurrent flowall flows
+
+[
+    {
+        "id": "1253d682.586989",
+        "type": "tab",
+        "label": "LedCycle"
+    },
+    {
+        "id": "a05fbe32.e80f4",
+        "type": "mqtt in",
+        "z": "1253d682.586989",
+        "name": "",
+        "topic": "devices/#",
+        "qos": "2",
+        "broker": "c8901da3.3a4a4",
+        "x": 191.5,
+        "y": 125.80000305175781,
+        "wires": [
+            [
+                "9a2f14b5.a0ccc8"
+            ]
+        ]
+    },
+    {
+        "id": "9a2f14b5.a0ccc8",
+        "type": "debug",
+        "z": "1253d682.586989",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 396.5,
+        "y": 122.60000610351562,
+        "wires": []
+    },
+    {
+        "id": "818a669d.e640e8",
+        "type": "inject",
+        "z": "1253d682.586989",
+        "name": "Red",
+        "topic": "",
+        "payload": "red",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 171.5,
+        "y": 228.80001831054688,
+        "wires": [
+            [
+                "7b688ba.78a4e74",
+                "566151c7.117ee",
+                "80b02e00.82bf8",
+                "dd641987.5ef518"
+            ]
+        ]
+    },
+    {
+        "id": "80b02e00.82bf8",
+        "type": "mqtt out",
+        "z": "1253d682.586989",
+        "name": "",
+        "topic": "devices/ewouts-ledcycle/led/color/set",
+        "qos": "",
+        "retain": "",
+        "broker": "c8901da3.3a4a4",
+        "x": 598.5000152587891,
+        "y": 201.60000610351562,
+        "wires": []
+    },
+    {
+        "id": "41765ea.bf547a",
+        "type": "inject",
+        "z": "1253d682.586989",
+        "name": "Green",
+        "topic": "",
+        "payload": "green",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 160.5,
+        "y": 278.8000183105469,
+        "wires": [
+            [
+                "80b02e00.82bf8",
+                "7b688ba.78a4e74",
+                "566151c7.117ee",
+                "dd641987.5ef518"
+            ]
+        ]
+    },
+    {
+        "id": "835b5a07.233148",
+        "type": "inject",
+        "z": "1253d682.586989",
+        "name": "Blue",
+        "topic": "",
+        "payload": "blue",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 161.50000381469727,
+        "y": 331.80003356933594,
+        "wires": [
+            [
+                "80b02e00.82bf8",
+                "7b688ba.78a4e74",
+                "566151c7.117ee",
+                "dd641987.5ef518"
+            ]
+        ]
+    },
+    {
+        "id": "fe03e72e.677b68",
+        "type": "inject",
+        "z": "1253d682.586989",
+        "name": "Off",
+        "topic": "",
+        "payload": "off",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 162.50000381469727,
+        "y": 384.80003547668457,
+        "wires": [
+            [
+                "80b02e00.82bf8",
+                "566151c7.117ee",
+                "dd641987.5ef518"
+            ]
+        ]
+    },
+    {
+        "id": "7b688ba.78a4e74",
+        "type": "delay",
+        "z": "1253d682.586989",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 339.5,
+        "y": 284.3999938964844,
+        "wires": [
+            [
+                "44be9e75.04adb"
+            ]
+        ]
+    },
+    {
+        "id": "44be9e75.04adb",
+        "type": "function",
+        "z": "1253d682.586989",
+        "name": "Off",
+        "func": "msg.payload = \"off\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 480.5,
+        "y": 277.20001220703125,
+        "wires": [
+            [
+                "80b02e00.82bf8",
+                "a5f6c1e1.acc49",
+                "566151c7.117ee",
+                "dd641987.5ef518"
+            ]
+        ]
+    },
+    {
+        "id": "a5f6c1e1.acc49",
+        "type": "debug",
+        "z": "1253d682.586989",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 663.5,
+        "y": 308.6000061035156,
+        "wires": []
+    },
+    {
+        "id": "566151c7.117ee",
+        "type": "mqtt out",
+        "z": "1253d682.586989",
+        "name": "",
+        "topic": "devices/lauras-ledcycle/led/color/set",
+        "qos": "",
+        "retain": "",
+        "broker": "c8901da3.3a4a4",
+        "x": 596.0000152587891,
+        "y": 359.0000057220459,
+        "wires": []
+    },
+    {
+        "id": "ae546b96.157668",
+        "type": "inject",
+        "z": "1253d682.586989",
+        "name": "Rainbow",
+        "topic": "",
+        "payload": "rainbow",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 169.00000381469727,
+        "y": 434.0000114440918,
+        "wires": [
+            [
+                "80b02e00.82bf8",
+                "566151c7.117ee",
+                "dd641987.5ef518"
+            ]
+        ]
+    },
+    {
+        "id": "dd641987.5ef518",
+        "type": "mqtt out",
+        "z": "1253d682.586989",
+        "name": "",
+        "topic": "devices/inges-ledcycle/led/color/set",
+        "qos": "",
+        "retain": "",
+        "broker": "c8901da3.3a4a4",
+        "x": 593.0000152587891,
+        "y": 434.0000104904175,
+        "wires": []
+    },
+    {
+        "id": "444526b3.e1c728",
+        "type": "mqtt in",
+        "z": "1253d682.586989",
+        "name": "",
+        "topic": "domoticz/out",
+        "qos": "2",
+        "broker": "c8901da3.3a4a4",
+        "x": 96.50000762939453,
+        "y": 688.0000171661377,
+        "wires": [
+            [
+                "36788d0e.d7df72"
+            ]
+        ]
+    },
+    {
+        "id": "5163c35c.80efbc",
+        "type": "function",
+        "z": "1253d682.586989",
+        "name": "Convert to LED wheel",
+        "func": "var idx = msg.payload[\"idx\"] || 0;\nnode.log(\"idx=\");\nnode.log(idx);\nvar result = [null,null,null];\nvar color = null;\nvar port = 0;\nswitch (idx) {\n    case 74: \n        port = 0;\n        color = \"red\";\n        break;\n    case 75: \n        port = 0;\n        color = \"green\";\n        break;\n    case 76: \n        port = 0;\n        color = \"blue\";\n        break;\n    case 77: \n        port = 0;\n        color = \"rainbow\";\n        break;\n    case 78: \n        port = 0;\n        color = \"off\";\n        break;\n    case 79: \n        port = 1;\n        color = \"red\";\n        break;\n    case 80: \n        port = 1;\n        color = \"green\";\n        break;\n    case 81: \n        port = 1;\n        color = \"blue\";\n        break;\n    case 82: \n        port = 1;\n        color = \"rainbow\";\n        break;\n    case 83: \n        port = 1;\n        color = \"off\";\n        break;\n    case 84: \n        port = 2;\n        color = \"red\";\n        break;\n    case 85: \n        port = 2;\n        color = \"green\";\n        break;\n    case 86: \n        port = 2;\n        color = \"blue\";\n        break;\n    case 87: \n        port = 2;\n        color = \"rainbow\";\n        break;\n    case 88: \n        port = 2;\n        color = \"off\";\n        break;\n    default:\n        return [null, null,null];\n}\n\nmsg.payload = color;\nresult[port] = msg;\n//result[3] = idx;\nreturn result;\n",
+        "outputs": "3",
+        "noerr": 0,
+        "x": 216.50001525878906,
+        "y": 499.60006618499756,
+        "wires": [
+            [
+                "80b02e00.82bf8",
+                "a5f6c1e1.acc49"
+            ],
+            [
+                "566151c7.117ee"
+            ],
+            [
+                "dd641987.5ef518"
+            ]
+        ]
+    },
+    {
+        "id": "1a70c54f.81064b",
+        "type": "debug",
+        "z": "1253d682.586989",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 502.5,
+        "y": 599.6000366210938,
+        "wires": []
+    },
+    {
+        "id": "36788d0e.d7df72",
+        "type": "json",
+        "z": "1253d682.586989",
+        "name": "",
+        "x": 123.00000762939453,
+        "y": 590.0000190734863,
+        "wires": [
+            [
+                "5163c35c.80efbc",
+                "1a70c54f.81064b"
+            ]
+        ]
+    },
+    {
+        "id": "c8901da3.3a4a4",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    }
+]
