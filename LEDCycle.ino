@@ -10,6 +10,7 @@
 #define ACTION_OFF 0
 #define ACTION_SOLID 1
 #define ACTION_RAINBOW 2
+#define ACTION_RAINBOW_LOOP 3
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
 //int delayval = 500; 
@@ -59,6 +60,11 @@ bool lightOnHandler(HomieRange range, String value) {
     theaterChaseRainbow.j = 0;
     theaterChaseRainbow.q = 0;
     ledNode.setProperty("color").send("0,0,0,1");
+  } else if (value == "rainbow-loop") {
+    action = ACTION_RAINBOW_LOOP;
+    theaterChaseRainbow.j = 0;
+    theaterChaseRainbow.q = 0;
+    ledNode.setProperty("color").send("0,0,0,1");
   } else {
     action = ACTION_SOLID;
     // split string at every "," and store in proper variable
@@ -79,15 +85,19 @@ void loopHandler() {
   } else if (action == ACTION_SOLID) {
     colorWipe(strip.Color(SoffitR, SoffitG, SoffitB), 50);
     delay(50);
-  } else if (action == ACTION_RAINBOW) {
+  } else if ((action == ACTION_RAINBOW) || (action == ACTION_RAINBOW_LOOP)) {
     theaterChaseRainbow.q++;
     if (theaterChaseRainbow.q == 3) {
       theaterChaseRainbow.q = 0;
       theaterChaseRainbow.j++;
     }
     if (theaterChaseRainbow.j == 256) {
-      action = ACTION_OFF;
-      return;
+      if (action == ACTION_RAINBOW_LOOP) {
+        theaterChaseRainbow.j = 0;
+      } else {
+        action = ACTION_OFF;
+        return;
+      }
     }
     for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
       strip.setPixelColor(i+theaterChaseRainbow.q, Wheel( (i+theaterChaseRainbow.j) % 255));    //turn every third pixel on
